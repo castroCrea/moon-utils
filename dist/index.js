@@ -49,6 +49,16 @@ class default_1 extends moon_1.MoonPlugin {
             return;
         if (props.settings)
             this.settings = props.settings;
+        this.settingsButtons = [
+            {
+                type: 'button',
+                callback: () => {
+                    window.open('https://moonjot.com', '_blank');
+                },
+                label: 'Button that trigger a callback',
+                description: 'Button that trigger a callback.'
+            }
+        ];
     }
 }
 exports.default = default_1;
