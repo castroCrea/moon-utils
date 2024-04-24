@@ -1,10 +1,10 @@
 {
   "name": "@moonjot/moon-sample-plugin",
-  "version": "0.1.14",
+  "version": "0.0.0",
   "description": "Moon sample plugin for Moon",
   "main": "./dist/index.js",
   "dependencies": {
-    "@moonjot/moon": "^0.1.57"
+    "@moonjot/moon": "^0.1.65"
   },
   "repository": {
     "type": "git",
