@@ -49,6 +49,18 @@ export default class extends MoonPlugin {
     super(props)
     if (!props) return
     if (props.settings) this.settings = props.settings
+
+    this.settingsButtons = [
+      {
+        type: 'button',
+        callback: () => {
+          window.open('https://moonjot.com', '_blank')
+        },
+        label: 'Button that trigger a callback',
+        description: 'Button that trigger a callback.'
+
+      }
+    ]
   }
 
   integration = {
