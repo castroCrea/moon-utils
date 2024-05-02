@@ -8,7 +8,7 @@ Moon Jot is base on a plugin system that make easy to develop your own integrati
 
 # Develop on Moon
 
-Check the doc here (https://github.com/castroCrea/moon/blob/main/doc/Plugin_Development.md)[https://github.com/castroCrea/moon/blob/main/doc/Plugin_Development.md]
+Check the doc here https://github.com/castroCrea/moon/blob/main/doc/Plugin_Development.md
 
 
 ## Installation
