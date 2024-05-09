@@ -10,12 +10,16 @@ describe('mergeMarkdownFiles', () => {
     expect(result).toEqual('\n# hey\n# bou\ncontent')
   })
   it('mergeMarkdownFiles 2', () => {
-    const result = mergeMarkdownFiles({ originalContent: '---description: odl description---\nsome old content', newContent: '---description: new description---\nsome new content' })
+    const result = mergeMarkdownFiles({ originalContent: '---description: old description---\nsome old content', newContent: '---description: new description---\nsome new content' })
     expect(result).toEqual('---\ndescription: new description\n---\nsome old content\nsome new content')
   })
   it('mergeMarkdownFiles 3', () => {
-    const result = mergeMarkdownFiles({ originalContent: '---description: odl description---\nsome old content', newContent: '---url: new url---\nsome new content' })
+    const result = mergeMarkdownFiles({ originalContent: '---description: old description---\nsome old content', newContent: '---url: new url---\nsome new content' })
+    expect(result).toEqual('---\ndescription: old description\nurl: new url\n---\nsome old content\nsome new content')
+  })
+  it('mergeMarkdownFiles 4', () => {
+    const result = mergeMarkdownFiles({ originalContent: '---description: old description---\nsome old content\n## Note\nsome old note\n## Task\n- [ ] some old task', newContent: '---url: new url---\nsome new content\n## Note\nsome new note\n## Task\n\n- [ ] some new task' })
     // console.log(JSON.stringify(result))
-    expect(result).toEqual('---\ndescription: odl description\nurl: new url\n---\nsome old content\nsome new content')
+    expect(result).toEqual('---\ndescription: old description\nurl: new url\n---\nsome old content\n## Note\nsome old note\nsome new note\n## Task\n- [ ] some old task\n- [ ] some new task\nsome new content\n')
   })
 })
