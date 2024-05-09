@@ -1,65 +1,22 @@
 "use strict";
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    var desc = Object.getOwnPropertyDescriptor(m, k);
+    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+      desc = { enumerable: true, get: function() { return m[k]; } };
+    }
+    Object.defineProperty(o, k2, desc);
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __exportStar = (this && this.__exportStar) || function(m, exports) {
+    for (var p in m) if (p !== "default" && !Object.prototype.hasOwnProperty.call(exports, p)) __createBinding(exports, m, p);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const moon_1 = require("@moonjot/moon");
-class default_1 extends moon_1.MoonPlugin {
-    constructor(props) {
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
-        super(props);
-        this.name = 'Sample';
-        this.logo = 'https://previews.123rf.com/images/aquir/aquir1311/aquir131100316/23569861-sample-grunge-red-round-stamp.jpg';
-        this.settingsDescription = {
-            token: {
-                type: 'string',
-                required: true,
-                label: 'Token',
-                description: 'The Sample plugin token.'
-            },
-            databaseId: {
-                type: 'string',
-                required: true,
-                label: 'Database ID',
-                description: 'The Sample database id plugin token.'
-            }
-        };
-        this.settings = {
-            token: '',
-            databaseId: ''
-        };
-        this.integration = {
-            callback: ({ context, html }) => __awaiter(this, void 0, void 0, function* () {
-                console.log('MoonPlugin integration');
-                return false;
-            }),
-            buttonIconUrl: 'https://previews.123rf.com/images/aquir/aquir1311/aquir131100316/23569861-sample-grunge-red-round-stamp.jpg'
-        };
-        this.context = ({ context }) => __awaiter(this, void 0, void 0, function* () {
-            console.log('MoonPlugin integration');
-            return context;
-        });
-        if (!props)
-            return;
-        if (props.settings)
-            this.settings = props.settings;
-        this.settingsButtons = [
-            {
-                type: 'button',
-                callback: () => {
-                    window.open('https://moonjot.com', '_blank');
-                },
-                label: 'Button that trigger a callback',
-                description: 'Button that trigger a callback.'
-            }
-        ];
-    }
-}
-exports.default = default_1;
+__exportStar(require("./extractText"), exports);
+__exportStar(require("./extractTitleFromMarkdown"), exports);
+__exportStar(require("./handleAnchors"), exports);
+__exportStar(require("./searchObject"), exports);
+__exportStar(require("./types"), exports);
 //# sourceMappingURL=index.js.map
