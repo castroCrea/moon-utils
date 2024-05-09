@@ -8,7 +8,7 @@ export const mergeMarkdownFiles = ({
 }: {
   originalContent: string
   newContent: string }
-) => {
+): string => {
   if (originalContent === newContent) return originalContent
   // Parse the YAML front matter from both contents
   const frontMatter1 = originalContent.split('---')[1]?.trim() ?? ''
