@@ -2,9 +2,12 @@ import yaml from 'js-yaml'
 
 const removeMDPropertiesFromContent = (content: string) => content.split('---').slice(2).join('---')
 
-export const mergeMarkdownFiles = (
-  originalContent: string,
-  newContent: string
+export const mergeMarkdownFiles = ({
+  originalContent,
+  newContent
+}: {
+  originalContent: string
+  newContent: string }
 ) => {
   if (originalContent === newContent) return originalContent
   // Parse the YAML front matter from both contents
