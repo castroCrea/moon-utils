@@ -4,7 +4,6 @@
   "description": "Moon Jot utils to build some plugins",
   "main": "./dist/index.js",
   "dependencies": {
-    "@moonjot/moon": "^0.1.72"
   },
   "repository": {
     "type": "git",
