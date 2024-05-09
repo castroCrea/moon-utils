@@ -7,10 +7,3 @@ export type SearchObject = Context & {
   task?: string
   content?: string
 }
-
-type Path = string
-
-export interface File {
-  content: string
-  path: Path
-}
