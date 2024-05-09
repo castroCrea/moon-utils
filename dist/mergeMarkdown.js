@@ -6,7 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.mergeMarkdownFiles = void 0;
 const js_yaml_1 = __importDefault(require("js-yaml"));
 const removeMDPropertiesFromContent = (content) => content.split('---').slice(2).join('---');
-const mergeMarkdownFiles = (originalContent, newContent) => {
+const mergeMarkdownFiles = ({ originalContent, newContent }) => {
     var _a, _b, _c, _d;
     if (originalContent === newContent)
         return originalContent;

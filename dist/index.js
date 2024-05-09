@@ -19,4 +19,5 @@ __exportStar(require("./extractTitleFromMarkdown"), exports);
 __exportStar(require("./handleAnchors"), exports);
 __exportStar(require("./searchObject"), exports);
 __exportStar(require("./types"), exports);
+__exportStar(require("./mergeMarkdown"), exports);
 //# sourceMappingURL=index.js.map

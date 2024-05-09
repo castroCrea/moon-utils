@@ -1,1 +1,4 @@
-export declare const mergeMarkdownFiles: (originalContent: string, newContent: string) => string;
+export declare const mergeMarkdownFiles: ({ originalContent, newContent }: {
+    originalContent: string;
+    newContent: string;
+}) => string;
