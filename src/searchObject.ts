@@ -9,9 +9,13 @@ export const searchObject = ({
   let current: Indexable = obj
 
   for (const key of keys) {
-    if (key in current) {
-      current = current[key]
-    } else { return undefined } // Key doesn't exist in the object
+    try {
+      if (key in current) {
+        current = current[key]
+      } else { return undefined } // Key doesn't exist in the object
+    } catch {
+      return undefined
+    }
   }
 
   return current // Return the value found at the end of the path

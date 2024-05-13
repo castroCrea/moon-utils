@@ -92,9 +92,9 @@ Currently, the condition only checks if something exists or does not exist.
 {{IF SOURCE.TEXT.includes(some t)}}content{{END_IF SOURCE.TEXT}}
 ```
 
-#### .startWidth(something)
+#### .startsWith(something)
 ```
-{{IF SOURCE.TEXT.startWidth(- [ ])}}content{{END_IF SOURCE.TEXT}}
+{{IF SOURCE.TEXT.startsWith(- [ ])}}content{{END_IF SOURCE.TEXT}}
 ```
 
 ## Date
