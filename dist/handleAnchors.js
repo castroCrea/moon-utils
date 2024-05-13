@@ -48,6 +48,14 @@ const comparatorsSetUp = {
             const currentValue = (0, searchObject_1.searchObject)({ obj: searchObj, path: values[0].toLowerCase() });
             return (currentValue === null || currentValue === void 0 ? void 0 : currentValue.includes(checkForMatchValue)) ? checkForMatchValue : undefined;
         }
+    },
+    '.startsWith': {
+        callback: ({ key, searchObj }) => {
+            const values = key.split('.startsWith(').map(v => v.trim());
+            const checkForMatchValue = values[1].slice(0, -1);
+            const currentValue = (0, searchObject_1.searchObject)({ obj: searchObj, path: values[0].toLowerCase() });
+            return (currentValue === null || currentValue === void 0 ? void 0 : currentValue.includes(checkForMatchValue)) ? checkForMatchValue : undefined;
+        }
     }
 };
 const handleConditions = ({ content, searchObj }) => {

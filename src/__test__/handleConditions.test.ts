@@ -56,4 +56,14 @@ URL: {{SOURCE.URL}}
     const result = handleConditions({ content, searchObj: { source: { text: 'some text', url: 'https://moonjot.com' } } as SearchObject })
     expect(result).toEqual('content')
   })
+  it('handleConditions with startsWith', () => {
+    const content = '{{IF SOURCE.TEXT.startsWith(- [ ])}}content{{END_IF SOURCE.TEXT}}{{IF SOURCE.TEXT.includes(some text hey) }}content different{{END_IF SOURCE.TEXT}}'
+    const result = handleConditions({ content, searchObj: { source: { text: '- [ ] some text', url: 'https://moonjot.com' } } as SearchObject })
+    expect(result).toEqual('content')
+  })
+  it('handleConditions with startsWith negated', () => {
+    const content = '{{IF SOURCE.TEXT.startsWith(- [ ])}}content{{END_IF SOURCE.TEXT}}{{IF SOURCE.TEXT.includes(some text hey) }}content different{{END_IF SOURCE.TEXT}}'
+    const result = handleConditions({ content, searchObj: { source: { text: '- [x] some text', url: 'https://moonjot.com' } } as SearchObject })
+    expect(result).toEqual('')
+  })
 })

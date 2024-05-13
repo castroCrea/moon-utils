@@ -51,6 +51,15 @@ const comparatorsSetUp = {
       const currentValue = searchObject({ obj: searchObj, path: values[0].toLowerCase() })
       return currentValue?.includes(checkForMatchValue) ? checkForMatchValue : undefined
     }
+  },
+  '.startsWith': {
+    callback: ({ key, searchObj }: ComparatorsSetUpProps) => {
+      const values = key.toLowerCase().split('.startswith(').map(v => v.trim())
+      const checkForMatchValue = values[1].slice(0, -1)
+
+      const currentValue = searchObject({ obj: searchObj, path: values[0].toLowerCase() })
+      return currentValue?.startsWith(checkForMatchValue) ? checkForMatchValue : undefined
+    }
   }
 }
 
@@ -70,7 +79,7 @@ export const handleConditions = ({ content, searchObj }: { content?: string, sea
     if (!ifValue) return
     const key = (ifValue.replace('{{IF ', '').replace('}}', '')).toLowerCase()
 
-    const comparator = (Object.keys(comparatorsSetUp) as Array<keyof typeof comparatorsSetUp>).find(element => key.includes(element))
+    const comparator = (Object.keys(comparatorsSetUp) as Array<keyof typeof comparatorsSetUp>).find(element => key.toLowerCase().includes(element.toLowerCase()))
 
     const keyValue = comparator ? comparatorsSetUp[comparator]?.callback({ key, searchObj }) : searchObject({ obj: searchObj, path: key })
 
