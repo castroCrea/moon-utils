@@ -84,12 +84,16 @@ Currently, the condition only checks if something exists or does not exist.
 
 #### !== some text
 ```
-{{IF SOURCE.TEXT !== some text}}content{{END_IF SOURCE.TEXT}}{{IF SOURCE.TEXT !== some text hey }}content different{{END_IF SOURCE.TEXT}}
+{{IF SOURCE.TEXT !== some text}}content{{END_IF SOURCE.TEXT}}}
 ```
 
 #### .includes(something)
 ```
-{{IF SOURCE.TEXT.includes(some t)}}content{{END_IF SOURCE.TEXT}}{{IF SOURCE.TEXT.includes(some text hey) }}content different{{END_IF SOURCE.TEXT}}
+{{IF SOURCE.TEXT.includes(some t)}}content{{END_IF SOURCE.TEXT}}
+```
+#### .startWidth(something)
+```
+{{IF SOURCE.TEXT.startWidth(- [ ])}}content{{END_IF SOURCE.TEXT}}
 ```
 
 ## Date
