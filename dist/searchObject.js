@@ -6,12 +6,17 @@ const searchObject = ({ obj, path }) => {
     const keys = path.split('.'); // Split the path string into an array of keys
     let current = obj;
     for (const key of keys) {
-        if (key in current) {
-            current = current[key];
+        try {
+            if (key in current) {
+                current = current[key];
+            }
+            else {
+                return undefined;
+            } // Key doesn't exist in the object
         }
-        else {
+        catch (_a) {
             return undefined;
-        } // Key doesn't exist in the object
+        }
     }
     return current; // Return the value found at the end of the path
 };
