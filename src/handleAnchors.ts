@@ -27,21 +27,21 @@ const comparatorsSetUp = {
     callback: ({ key, searchObj }: ComparatorsSetUpProps) => {
       const values = key.split('=== undefined').map(v => v.trim())
       const keyValues = searchObject({ obj: searchObj, path: values[0].toLowerCase() })
-      return keyValues === undefined ? true : undefined
+      return keyValues === undefined
     }
   },
   '===': {
     callback: ({ key, searchObj }: ComparatorsSetUpProps) => {
       const values = key.split('===').map(v => v.trim())
       const keyValues = values.map(value => searchObject({ obj: searchObj, path: value.toLowerCase() }) ?? value)
-      return keyValues[0] === keyValues[1] ? keyValues[1] : undefined
+      return keyValues[0] === keyValues[1]
     }
   },
   '!==': {
     callback: ({ key, searchObj }: ComparatorsSetUpProps) => {
       const values = key.split('!==').map(v => v.trim())
       const keyValues = values.map(value => searchObject({ obj: searchObj, path: value.toLowerCase() }) ?? value)
-      return keyValues[0] !== keyValues[1] ? keyValues[1] : undefined
+      return keyValues[0] !== keyValues[1]
     }
   },
   '.includes': {
@@ -49,7 +49,7 @@ const comparatorsSetUp = {
       const values = key.split('.includes(').map(v => v.trim())
       const checkForMatchValue = values[1].slice(0, -1)
       const currentValue = searchObject({ obj: searchObj, path: values[0].toLowerCase() })
-      return currentValue?.includes(checkForMatchValue) ? checkForMatchValue : undefined
+      return currentValue?.includes(checkForMatchValue)
     }
   },
   '.startsWith': {
@@ -58,7 +58,7 @@ const comparatorsSetUp = {
       const checkForMatchValue = values[1].slice(0, -1)
 
       const currentValue = searchObject({ obj: searchObj, path: values[0].toLowerCase() })
-      return currentValue?.startsWith(checkForMatchValue) ? checkForMatchValue : undefined
+      return currentValue?.startsWith(checkForMatchValue)
     }
   }
 }

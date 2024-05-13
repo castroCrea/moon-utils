@@ -66,4 +66,9 @@ URL: {{SOURCE.URL}}
     const result = handleConditions({ content, searchObj: { source: { text: '- [x] some text', url: 'https://moonjot.com' } } as SearchObject })
     expect(result).toEqual('')
   })
+  it('handleConditions with content empty', () => {
+    const content = '{{IF content === }}{{IF people.0.twitter.0}}<a href="{{people.0.twitter.0}}">{{people.0.name}}</a>{{END_IF people.0.name}}{{END_IF content}}'
+    const result = handleConditions({ content, searchObj: { content: '', people: [{ twitter: ['url'], name: 'name' }] } as SearchObject })
+    expect(result).toEqual('<a href=\"url\">name</a>')
+  })
 })
