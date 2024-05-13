@@ -24,21 +24,21 @@ const comparatorsSetUp = {
         callback: ({ key, searchObj }) => {
             const values = key.split('=== undefined').map(v => v.trim());
             const keyValues = (0, searchObject_1.searchObject)({ obj: searchObj, path: values[0].toLowerCase() });
-            return keyValues === undefined ? true : undefined;
+            return keyValues === undefined;
         }
     },
     '===': {
         callback: ({ key, searchObj }) => {
             const values = key.split('===').map(v => v.trim());
             const keyValues = values.map(value => { var _a; return (_a = (0, searchObject_1.searchObject)({ obj: searchObj, path: value.toLowerCase() })) !== null && _a !== void 0 ? _a : value; });
-            return keyValues[0] === keyValues[1] ? keyValues[1] : undefined;
+            return keyValues[0] === keyValues[1];
         }
     },
     '!==': {
         callback: ({ key, searchObj }) => {
             const values = key.split('!==').map(v => v.trim());
             const keyValues = values.map(value => { var _a; return (_a = (0, searchObject_1.searchObject)({ obj: searchObj, path: value.toLowerCase() })) !== null && _a !== void 0 ? _a : value; });
-            return keyValues[0] !== keyValues[1] ? keyValues[1] : undefined;
+            return keyValues[0] !== keyValues[1];
         }
     },
     '.includes': {
@@ -46,7 +46,7 @@ const comparatorsSetUp = {
             const values = key.split('.includes(').map(v => v.trim());
             const checkForMatchValue = values[1].slice(0, -1);
             const currentValue = (0, searchObject_1.searchObject)({ obj: searchObj, path: values[0].toLowerCase() });
-            return (currentValue === null || currentValue === void 0 ? void 0 : currentValue.includes(checkForMatchValue)) ? checkForMatchValue : undefined;
+            return currentValue === null || currentValue === void 0 ? void 0 : currentValue.includes(checkForMatchValue);
         }
     },
     '.startsWith': {
@@ -54,7 +54,7 @@ const comparatorsSetUp = {
             const values = key.toLowerCase().split('.startswith(').map(v => v.trim());
             const checkForMatchValue = values[1].slice(0, -1);
             const currentValue = (0, searchObject_1.searchObject)({ obj: searchObj, path: values[0].toLowerCase() });
-            return (currentValue === null || currentValue === void 0 ? void 0 : currentValue.startsWith(checkForMatchValue)) ? checkForMatchValue : undefined;
+            return currentValue === null || currentValue === void 0 ? void 0 : currentValue.startsWith(checkForMatchValue);
         }
     }
 };
