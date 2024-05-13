@@ -6,6 +6,15 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.mergeMarkdownFiles = void 0;
 const js_yaml_1 = __importDefault(require("js-yaml"));
 const removeMDPropertiesFromContent = (content) => content.split('---').slice(2).join('---');
+const turnTextIntoYAML = (text) => {
+    var _a;
+    try {
+        return (_a = js_yaml_1.default.load(text)) !== null && _a !== void 0 ? _a : {};
+    }
+    catch (_b) {
+        return {};
+    }
+};
 const mergeMarkdownFiles = ({ originalContent, newContent }) => {
     var _a, _b, _c, _d;
     if (originalContent === newContent)
@@ -14,8 +23,8 @@ const mergeMarkdownFiles = ({ originalContent, newContent }) => {
     const frontMatter1 = (_b = (_a = originalContent.split('---')[1]) === null || _a === void 0 ? void 0 : _a.trim()) !== null && _b !== void 0 ? _b : '';
     const frontMatter2 = (_d = (_c = newContent.split('---')[1]) === null || _c === void 0 ? void 0 : _c.trim()) !== null && _d !== void 0 ? _d : '';
     // Convert YAML front matter to objects
-    const data1 = (js_yaml_1.default.load(frontMatter1) || {});
-    const data2 = (js_yaml_1.default.load(frontMatter2) || {});
+    const data1 = turnTextIntoYAML(frontMatter1);
+    const data2 = turnTextIntoYAML(frontMatter2);
     // Merge the front matter data while avoiding duplication
     const mergedData = Object.assign(Object.assign({}, (data1 || {})), (data2 || {}));
     for (const topic in data1) {
