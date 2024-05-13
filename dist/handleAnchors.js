@@ -51,10 +51,10 @@ const comparatorsSetUp = {
     },
     '.startsWith': {
         callback: ({ key, searchObj }) => {
-            const values = key.split('.startsWith(').map(v => v.trim());
+            const values = key.toLowerCase().split('.startswith(').map(v => v.trim());
             const checkForMatchValue = values[1].slice(0, -1);
             const currentValue = (0, searchObject_1.searchObject)({ obj: searchObj, path: values[0].toLowerCase() });
-            return (currentValue === null || currentValue === void 0 ? void 0 : currentValue.includes(checkForMatchValue)) ? checkForMatchValue : undefined;
+            return (currentValue === null || currentValue === void 0 ? void 0 : currentValue.startsWith(checkForMatchValue)) ? checkForMatchValue : undefined;
         }
     }
 };
@@ -74,7 +74,7 @@ const handleConditions = ({ content, searchObj }) => {
         if (!ifValue)
             return;
         const key = (ifValue.replace('{{IF ', '').replace('}}', '')).toLowerCase();
-        const comparator = Object.keys(comparatorsSetUp).find(element => key.includes(element));
+        const comparator = Object.keys(comparatorsSetUp).find(element => key.toLowerCase().includes(element.toLowerCase()));
         const keyValue = comparator ? (_b = comparatorsSetUp[comparator]) === null || _b === void 0 ? void 0 : _b.callback({ key, searchObj }) : (0, searchObject_1.searchObject)({ obj: searchObj, path: key });
         if (!keyValue) {
             content = content === null || content === void 0 ? void 0 : content.replace(value, '').trim();
