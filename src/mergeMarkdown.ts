@@ -2,6 +2,14 @@ import yaml from 'js-yaml'
 
 const removeMDPropertiesFromContent = (content: string) => content.split('---').slice(2).join('---')
 
+const turnTextIntoYAML = (text: string): Record<string, any> => {
+  try {
+    return yaml.load(text) ?? {}
+  } catch {
+    return {}
+  }
+}
+
 export const mergeMarkdownFiles = ({
   originalContent,
   newContent
@@ -15,8 +23,8 @@ export const mergeMarkdownFiles = ({
   const frontMatter2 = newContent.split('---')[1]?.trim() ?? ''
 
   // Convert YAML front matter to objects
-  const data1 = (yaml.load(frontMatter1) || {}) as Record<string, any>
-  const data2 = (yaml.load(frontMatter2) || {}) as Record<string, any>
+  const data1 = turnTextIntoYAML(frontMatter1)
+  const data2 = turnTextIntoYAML(frontMatter2)
 
   // Merge the front matter data while avoiding duplication
   const mergedData: Record<string, any> = {
