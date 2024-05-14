@@ -84,7 +84,13 @@ export const handleConditions = ({ content, searchObj }: { content?: string, sea
     const keyValue = comparator ? comparatorsSetUp[comparator]?.callback({ key, searchObj }) : searchObject({ obj: searchObj, path: key })
 
     if (!keyValue) {
-      content = content?.replace(value, '').trim()
+      try {
+        const trimmedValue = value.substring(1).replaceAll(/[.*+?^${}()|[\]\\]/g, '\\$&')
+        const regexEmpty = new RegExp(`(\n{|{)${trimmedValue}`, 'ig')
+        content = content?.replace(regexEmpty, '').trim()
+      } catch {
+        content = content?.replace(value, '').trim()
+      }
     } else {
       let valueReplaced = value
       const endIfValue = value.match(regexIfEnd)?.[0]

@@ -77,7 +77,14 @@ const handleConditions = ({ content, searchObj }) => {
         const comparator = Object.keys(comparatorsSetUp).find(element => key.toLowerCase().includes(element.toLowerCase()));
         const keyValue = comparator ? (_b = comparatorsSetUp[comparator]) === null || _b === void 0 ? void 0 : _b.callback({ key, searchObj }) : (0, searchObject_1.searchObject)({ obj: searchObj, path: key });
         if (!keyValue) {
-            content = content === null || content === void 0 ? void 0 : content.replace(value, '').trim();
+            try {
+                const trimmedValue = value.substring(1).replaceAll(/[.*+?^${}()|[\]\\]/g, '\\$&');
+                const regexEmpty = new RegExp(`(\n{|{)${trimmedValue}`, 'ig');
+                content = content === null || content === void 0 ? void 0 : content.replace(regexEmpty, '').trim();
+            }
+            catch (_d) {
+                content = content === null || content === void 0 ? void 0 : content.replace(value, '').trim();
+            }
         }
         else {
             let valueReplaced = value;
