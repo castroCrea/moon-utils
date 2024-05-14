@@ -77,11 +77,11 @@ export const handleConditions = ({ content, searchObj }: { content?: string, sea
   matches?.forEach(value => {
     const ifValue = value.match(regexIfStart)?.[0]
     if (!ifValue) return
-    const key = (ifValue.replace('{{IF ', '').replace('}}', '')).toLowerCase()
+    const key = (ifValue.replace('{{IF ', '').replace('}}', ''))
 
     const comparator = (Object.keys(comparatorsSetUp) as Array<keyof typeof comparatorsSetUp>).find(element => key.toLowerCase().includes(element.toLowerCase()))
 
-    const keyValue = comparator ? comparatorsSetUp[comparator]?.callback({ key, searchObj }) : searchObject({ obj: searchObj, path: key })
+    const keyValue = comparator ? comparatorsSetUp[comparator]?.callback({ key, searchObj }) : searchObject({ obj: searchObj, path: key.toLowerCase() })
 
     if (!keyValue) {
       try {
