@@ -1,6 +1,6 @@
 {
   "name": "@moonjot/moon-utils",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "Moon Jot utils to build some plugins",
   "main": "./dist/index.js",
   "dependencies": {
