@@ -73,7 +73,7 @@ const handleConditions = ({ content, searchObj }) => {
         const ifValue = (_a = value.match(regexIfStart)) === null || _a === void 0 ? void 0 : _a[0];
         if (!ifValue)
             return;
-        const key = (ifValue.replace('{{IF ', '').replace('}}', ''));
+        const key = (ifValue.replace('{{IF ', '').replace('}}', '')).trim();
         const comparator = Object.keys(comparatorsSetUp).find(element => key.toLowerCase().includes(element.toLowerCase()));
         const keyValue = comparator ? (_b = comparatorsSetUp[comparator]) === null || _b === void 0 ? void 0 : _b.callback({ key, searchObj }) : (0, searchObject_1.searchObject)({ obj: searchObj, path: key.toLowerCase() });
         if (!keyValue) {
