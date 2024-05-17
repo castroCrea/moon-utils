@@ -6,6 +6,7 @@ export const handleReplacingProperties = ({ content, searchObj }: { content?: st
   const regex = /{{((\S)*?)}}/gm
 
   const matches = content?.match(regex)
+
   matches?.forEach(value => {
     const key = (value.replace('{{', '').replace('}}', '')).toLowerCase()
     const keyValue = searchObject({ obj: searchObj, path: key })
@@ -77,7 +78,7 @@ export const handleConditions = ({ content, searchObj }: { content?: string, sea
   matches?.forEach(value => {
     const ifValue = value.match(regexIfStart)?.[0]
     if (!ifValue) return
-    const key = (ifValue.replace('{{IF ', '').replace('}}', ''))
+    const key = (ifValue.replace('{{IF ', '').replace('}}', '')).trim()
 
     const comparator = (Object.keys(comparatorsSetUp) as Array<keyof typeof comparatorsSetUp>).find(element => key.toLowerCase().includes(element.toLowerCase()))
 

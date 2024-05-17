@@ -10,10 +10,12 @@ export const searchObject = ({
 
   for (const key of keys) {
     try {
-      if (key in current) {
-        current = current[key]
+      const findKey = Object.keys(current).find(k => k.toLowerCase() === key.toLowerCase())
+      if (current && findKey) {
+        current = current[findKey]
       } else { return undefined } // Key doesn't exist in the object
-    } catch {
+    } catch (e) {
+      console.log({ e })
       return undefined
     }
   }

@@ -107,4 +107,28 @@ URL: {{SOURCE.URL}}
     const result = getPath({ content, searchObj: { source: { text: 'some text', url: 'https://moonjot.com' }, people: [{ name: 'Henni' }] } as SearchObject, log: undefined })
     expect(result.path).toEqual('/People/Henni.md')
   })
+
+  it('getPath People Condition with plugin playground', () => {
+    const content = `{{START_NOTE}}
+{{PATH}}
+{{IF pluginPlayground.obsidian.notePath }}{{pluginPlayground.obsidian.notePath}}/{{TITLE}}.md {{END_IF pluginPlayground.obsidian.notePath }}
+{{IF TITLE}}/Notes/{{TITLE}}.md {{END_IF TITLE}}
+{{END_PATH}}
+{{END_NOTE}}`
+    const result = getPath({
+      content,
+      searchObj: {
+        pluginPlayground: {
+          obsidian: {
+            notePath: '/🌔 Moon'
+          }
+        },
+        title: 'TITLE',
+        source: { text: 'some text', url: 'https://moonjot.com' },
+        people: [{ name: 'Henni' }]
+      } as SearchObject,
+      log: undefined
+    })
+    expect(result.path).toEqual('/🌔 Moon/TITLE.md')
+  })
 })
