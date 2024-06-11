@@ -71,4 +71,137 @@ URL: {{SOURCE.URL}}
     const result = handleConditions({ content, searchObj: { content: '', people: [{ twitter: ['url'], name: 'name' }] } as SearchObject })
     expect(result).toEqual('<a href=\"url\">name</a>')
   })
+  it('handleConditions that loop', () => {
+    const content = `
+{{content}}
+
+{{IF source.url}}
+
+# {{IF source.title}}{{source.title}}{{END_IF source.title}}
+
+{{IF source.url}}{{source.url}}{{END_IF source.url}}
+
+{{IF source.image}}![]({{source.image}}){{END_IF source.image}}
+
+{{IF source.description}}{{source.description}}{{END_IF source.description}}
+
+{{IF source.type === Tweet }}{{source.text}}{{END_IF source.type}}
+
+{{END_IF source.url}}`
+
+    const result = handleConditions({
+      content,
+      searchObj: {
+        content: '',
+        people: [
+          {
+            name: 'John Doe',
+            picture: 'https://example.com/john-doe.jpg',
+            job: 'Software Engineer',
+            email: 'john.doe@example.com',
+            about: 'An experienced software engineer specializing in front-end development.',
+            linkedin: ['https://linkedin.com/in/johndoe'],
+            twitter: ['https://twitter.com/johndoe'],
+            tiktok: [],
+            instagram: [],
+            substack: [],
+            github: ['https://github.com/johndoe'],
+            mastodon: [],
+            youtube: [],
+            website: ['https://johndoe.dev'],
+            names: ['JD', 'John'],
+            anchor: 'john_doe_anchor'
+          }
+        ],
+        // keywords: {
+        //   subject: ["TypeScript", "JavaScript", "Front-End Development"],
+        //   collections: ["Tech Articles", "Programming Guides"],
+        //   organizations: ["OpenAI", "Google"],
+        //   places: ["San Francisco", "New York"],
+        //   people: ["Elon Musk", "Ada Lovelace"],
+        //   hashTags: ["#coding", "#tech"],
+        //   emails: ["contact@example.com"],
+        //   atMentions: ["@techguru"],
+        //   urls: ["https://example.com", "https://techblog.com"],
+        //   phoneNumbers: ["+1234567890"],
+        //   acronyms: ["API", "JSON"],
+        //   quotations: ["To be or not to be.", "Hello, World!"]
+        // },
+        source: {
+          title: 'Understanding TypeScript',
+          url: 'https://example.com/understanding-typescript',
+          canonical: 'https://example.com/understanding-typescript',
+          image: 'https://example.com/ts-image.jpg',
+          description: 'A comprehensive guide to understanding TypeScript.',
+          content: 'TypeScript is a typed superset of JavaScript that compiles to plain JavaScript...',
+          published: '2024-06-11',
+          timestamp: [
+            {
+              timestamp: '2024-06-10T10:00:00Z',
+              url: 'https://example.com/initial-release'
+            }
+          ],
+          appName: 'TechBlog',
+          type: 'Article',
+          dmContent: [
+            {
+              content: 'Check out this article on TypeScript!',
+              published: '2024-06-10T10:00:00Z'
+            }
+          ],
+          ttr: 5,
+          text: 'Understanding TypeScript: A comprehensive guide.',
+          icon: 'https://example.com/ts-icon.png',
+          price: 'Free',
+          rating: '5 stars',
+          recipeIngredient: [],
+          recipeInstructions: [],
+          startDate: '2024-06-01',
+          endDate: '2024-06-30',
+          location: 'Online'
+        },
+        // other: {
+        //   duration: 30,
+        //   creationDate: "2024-06-01",
+        //   aiTitle: "Learn TypeScript Easily"
+        // },
+        // isFinished: true,
+        // error: 'This is an error message.',
+        // loader: false,
+        // clipContent: true,
+        pluginPlayground: {
+          examplePlugin: {
+            item1: {
+              value: ['exampleValue1'],
+              render: [
+                {
+                  background: '#ffffff',
+                  color: '#000000',
+                  title: 'Example Title 1'
+                }
+              ]
+            },
+            item2: {
+              value: ['exampleValue2'],
+              render: [
+                {
+                  background: '#eeeeee',
+                  color: '#111111',
+                  title: 'Example Title 2'
+                }
+              ]
+            }
+          }
+        }
+      } as SearchObject
+    })
+    console.log(result)
+    expect(result).toEqual(`# Understanding TypeScript
+
+https://example.com/understanding-typescript
+
+![](https://example.com/ts-image.jpg)
+
+A comprehensive guide to understanding TypeScript.`)
+  })
 })
